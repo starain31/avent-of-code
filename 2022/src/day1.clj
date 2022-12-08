@@ -13,7 +13,19 @@
        (map total-calory)
        (apply max)))
 
+(defn part2 [input-file]
+  (->> (util/read-lines input-file)
+       (partition-by empty?)
+       (remove #(= '("") %))
+       (map total-calory)
+       (sort >)
+       (take 3)
+       (apply +)))
+
 (comment
+  
+  (part2 "input/day1.txt")
+  
   (part1 "input/day1.txt")
   
   (defn total-calory [calories]
