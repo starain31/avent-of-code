@@ -6,8 +6,8 @@
   (let [middle-index (/ (count rucksack) 2)]
     [(take middle-index rucksack) (drop middle-index rucksack)]))
 
-(defn- common-item [[first-compartment second-compartment]]
-  (set/intersection (set first-compartment) (set second-compartment)))
+(defn- common-item [compartments]
+  (apply set/intersection (map set compartments)))
 
 (def priority
   (zipmap "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -15,6 +15,15 @@
 
 (comment
 
+  ;;part-2
+  (->> (util/read-lines "input/day3.txt")
+       (partition 3)
+       (map common-item)
+       (apply concat)
+       (map priority)
+       (apply +))
+  
+  (concat #{1 2} #{2 3} )
   (priority \z)
 
   (set "abc")
